@@ -6,11 +6,13 @@ const minus = document.getElementById("minus");
 const number = document.querySelector("span");
 
 /*legacy redux*/
+const INCREASE = "increase";
+const DECREASE = "decrease";
 const countReducer = (state = 0, action) => {
   switch (action.type) {
-    case "increase":
+    case INCREASE:
       return ++state;
-    case "decrease":
+    case DECREASE:
       return --state;
     default:
       return state;
@@ -20,10 +22,8 @@ const countStore = legacy_createStore(countReducer); //store <-- state 저장소
 countStore.subscribe(() => {
   number.innerText = countStore.getState();
 }); //state 가 update 되면 호출되는 subscribe(state 를 주시하고 있다.)
-add.addEventListener("click", () => countStore.dispatch({ type: "increase" }));
-minus.addEventListener("click", () =>
-  countStore.dispatch({ type: "decrease" })
-);
+add.addEventListener("click", () => countStore.dispatch({ type: INCREASE }));
+minus.addEventListener("click", () => countStore.dispatch({ type: DECREASE }));
 
 /*origin*/
 // let count = 0;
